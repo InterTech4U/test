@@ -1,0 +1,21 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: projekty
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 7f997a0c77b7e03849616dd2e76f93ef26ac507a
+
+    # id statusu oznaczającego zadanie zakończone
+    id_status_task_closed: 4
+
+    # priorytety zadań:
+    priorytet:
+        1: wysoki
+        2: średni
+        3: niski

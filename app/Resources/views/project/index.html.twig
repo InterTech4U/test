@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+
+{% block sidebarOffcanvas %}
+	{% include 'project/sidebarOffcanvas.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+
+    <h1>Projekty</h1> 
+
+    <table class="table  table-striped">
+        <thead>
+            <tr>
+				<th>Klient</th>
+                <th>Nazwa projektu</th>
+                <th>Procent realizacji</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr>
+				<td>{{ project.getIdClient() }}</td>
+                <td>{{ project.name }}</td>
+                <td>{{ statistics_service.percentOfImplementation( project.id, '%' ) }}</td>
+                <td class="text-right">
+					<a href="{{ path('project_show', { 'id': project.id }) }}" class="btn btn-info btn-sm " role="button">szczegóły</a>
+					<a href="{{ path('project_edit', { 'id': project.id }) }}" class="btn btn-success btn-sm " role="button">edycja</a>
+					<a href="{{ app.request.getBaseURL() ~ asset('task') }}/index/{{ project.id }}" class="btn btn-warning btn-sm " role="button">Lista zadań</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

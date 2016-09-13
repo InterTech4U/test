@@ -1,0 +1,14 @@
+{% set currentSubMenu = app.request.getPathInfo()|split('/') %}
+{% if currentSubMenu[2] is defined %}
+	{% set currentSubMenu = currentSubMenu[2] %}
+{% else %}
+	{% set currentSubMenu = "" %}
+{% endif %}
+
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+		<div class="list-group">
+			<a href="{{ path('project_index') }}" class="list-group-item {% if currentSubMenu == "" %}active{% endif %}">Lista projektów</a>
+			<a href="{{ path('project_new') }}" class="list-group-item {% if currentSubMenu == "new" %}active{% endif %}">Dodaj projekt</a>
+			<!-- <a href="#" class="list-group-item {% if currentSubMenu == "filter" %}active{% endif %}">Filtrowanie</a> -->
+		</div>
+	</div><!--/.sidebar-offcanvas-->

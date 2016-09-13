@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+
+{% block sidebarOffcanvas %}
+	{% include 'task/sidebarOffcanvas.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <h1>Zadania</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Nazwa</th>
+                <th>Data utworzenia</th>
+				<th>Status</th>
+				<th>Priorytet</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+		{% set lastProject = "" %}
+        {% for task in tasks %}
+			{% if task.getIdProject() != lastProject %}
+				{% set lastProject = task.getIdProject() %}
+				<tr>
+					<td colspan="5" class="danger">Projekt: <b>{{ task.getIdProject().getIdClient() ~ ' - ' ~ task.getIdProject() }}</b></td>
+				</tr>
+			{% endif %}
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{% if task.timestampAdd %}{{ task.timestampAdd|date('Y-m-d H:i:s') }}{% endif %}</td>
+				<td>{{ task.getIdStatusOfTask() }}</td>
+				<td>{{ task.priorytet }} - {{ priorytet[task.priorytet] }}</td>
+                <td class="text-right">
+					<a href="{{ path('task_show', { 'id': task.id }) }}" class="btn btn-info btn-sm" role="button">szczegóły</a>
+					<a href="{{ path('task_edit', { 'id': task.id }) }}" class="btn btn-success btn-sm " role="button">edycja</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

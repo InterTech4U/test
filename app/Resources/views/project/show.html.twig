@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebarOffcanvas %}
+	{% include 'project/sidebarOffcanvas.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <h1>Projekt</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Klient</th>
+                <td>{{ project.getIdClient() }}</td>
+            </tr>
+			<tr>
+                <th>Nazwa</th>
+                <td>{{ project.name }}</td>
+            </tr>
+            <tr>
+                <th>Opis</th>
+                <td>{{ project.description }}</td>
+            </tr>
+            <tr>
+                <th>Data dodania</th>
+                <td>{% if project.timestampAdd %}{{ project.timestampAdd|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+	
+	{{ form_start(delete_form) }}
+		<a href="{{ path('project_edit', { 'id': project.id }) }}" class="btn btn-info" role="button">Edit</a>
+		<input type="submit" value="Delete" class="btn btn-danger" />
+	{{ form_end(delete_form) }}
+
+{% endblock %}

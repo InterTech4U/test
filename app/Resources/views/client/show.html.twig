@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebarOffcanvas %}
+	{% include 'client/sidebarOffcanvas.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    <h1>Klienci</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Data dodania</th>
+                <td>{% if client.timestampAdd %}{{ client.timestampAdd|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nazwa</th>
+                <td>{{ client.name }}</td>
+            </tr>
+            <tr>
+                <th>Nip</th>
+                <td>{{ client.nip }}</td>
+            </tr>
+            <tr>
+                <th>Kraj</th>
+                <td>{{ client.country }}</td>
+            </tr>
+            <tr>
+                <th>Ulica</th>
+                <td>{{ client.street }}</td>
+            </tr>
+            <tr>
+                <th>Kod pocztowy</th>
+                <td>{{ client.postCode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+	{{ form_start(delete_form) }}
+		<a href="{{ path('client_edit', { 'id': client.id }) }}" class="btn btn-info" role="button">Edit</a>
+		<input type="submit" value="Delete" class="btn btn-danger" />
+	{{ form_end(delete_form) }}
+	
+
+{% endblock %}

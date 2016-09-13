@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+
+{% block sidebarOffcanvas %}
+	{% include 'client/sidebarOffcanvas.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <h1>Klienci</h1>
+
+    <table class="table  table-striped">
+        <thead>
+            <tr>
+                
+                <th>Nazwa</th>
+                <th>Nip</th>
+                <th>Kraj</th>
+                <th>Ulica</th>
+                <th>Kod pocztowy</th>
+				<th>Data dodania</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.name }}</td>
+                <td>{{ client.nip }}</td>
+                <td>{{ client.country }}</td>
+                <td>{{ client.street }}</td>
+                <td>{{ client.postCode }}</td>
+                <td>{% if client.timestampAdd %}{{ client.timestampAdd|date('Y-m-d H:i:s') }}{% endif %}</td>
+				<td>
+					<a href="{{ path('client_show', { 'id': client.id }) }}" class="btn btn-info btn-sm " role="button">szczegóły</a>
+					<a href="{{ path('client_edit', { 'id': client.id }) }}" class="btn btn-success btn-sm " role="button">edycja</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

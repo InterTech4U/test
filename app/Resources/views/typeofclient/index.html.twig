@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>TypeOfClient list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeOfClient in typeOfClients %}
+            <tr>
+                <td><a href="{{ path('typeofclient_show', { 'id': typeOfClient.id }) }}">{{ typeOfClient.id }}</a></td>
+                <td>{{ typeOfClient.name }}</td>
+                <td>{{ typeOfClient.status }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('typeofclient_show', { 'id': typeOfClient.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('typeofclient_edit', { 'id': typeOfClient.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('typeofclient_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

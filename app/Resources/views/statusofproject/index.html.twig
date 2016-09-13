@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>StatusOfProject list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for statusOfProject in statusOfProjects %}
+            <tr>
+                <td><a href="{{ path('statusofproject_show', { 'id': statusOfProject.id }) }}">{{ statusOfProject.id }}</a></td>
+                <td>{{ statusOfProject.name }}</td>
+                <td>{{ statusOfProject.status }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('statusofproject_show', { 'id': statusOfProject.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('statusofproject_edit', { 'id': statusOfProject.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('statusofproject_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

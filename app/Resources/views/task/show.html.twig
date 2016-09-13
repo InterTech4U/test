@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+
+{% block sidebarOffcanvas %}
+	{% include 'task/sidebarOffcanvas.html.twig' %}
+{% endblock %}
+
+
+{% block body %}
+    <h1>Zadanie</h1>
+
+    <table class="table">
+        <tbody>
+			<tr>
+                <th>Projekt</th>
+                <td>{{ task.getIdProject().getIdClient() ~ ' - ' ~ task.getIdProject() }}</td>
+            </tr>
+            <tr>
+                <th>Name zadania</th>
+                <td>{{ task.name }}</td>
+            </tr>
+            <tr>
+                <th>Opis</th>
+                <td>{{ task.description }}</td>
+            </tr>
+			<tr>
+                <th>Status</th>
+                <td>{{ task.getIdStatusOfTask() }}</td>
+            </tr>
+			<tr>
+                <th>Priorytet</th>
+                <td>{{ task.priorytet }} - {{ priorytet[task.priorytet] }}</td>
+            </tr>
+            <tr>
+                <th>Data utworzenia</th>
+                <td>{% if task.timestampAdd %}{{ task.timestampAdd|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+			<tr>
+                <th>Przypisane do pracownika</th>
+                <td>
+					<b>{{ task.getAssignToUser() }}</b> 
+					{% set email = task.getAssignToUser().getEmail() %} 
+					{% if email != '' %}
+						<a href='mailto:{{ email }}' class="btn btn-default" role="button">{{ email }}</a>
+					{% endif %}
+				</td>
+            </tr>
+        </tbody>
+    </table>
+
+	{{ form_start(delete_form) }}
+		<a href="{{ path('task_edit', { 'id': task.id }) }}" class="btn btn-info" role="button">Edit</a>
+		<input type="submit" value="Delete" class="btn btn-danger" role="button" />
+	{{ form_end(delete_form) }}
+
+{% endblock %}
